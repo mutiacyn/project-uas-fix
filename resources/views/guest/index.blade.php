@@ -116,38 +116,31 @@
                 </div>
             </div>
             <div class="row g-5 animated fadeIn">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Crafted Furniture</h5>
+                        <h5 class="lh-base mb-0">Data Karyawan</h5>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Sustainable Material</h5>
+                        <h5 class="lh-base mb-0">Absesi & Kehadiran</h5>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-6 col-lg-4">
                     <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Innovative Architects</h5>
+                        <h5 class="lh-base mb-0">Manajemen Cuti & Izin</h5>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
-                            <i class="fa fa-robot text-primary"></i>
-                        </div>
-                        <h5 class="lh-base mb-0">Budget Friendly</h5>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
