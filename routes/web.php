@@ -10,14 +10,12 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
-
-Route::get('/user', [UserController::class, 'index'])
-    ->name('user.index');
-
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
 Route::get('/home', [GuestDashboardController::class, 'index'])->name('guest.index');
 
-Route::get('/staff', function () {
-    return view('staff-dashboard');
-});
+// GRUP RUTE STAFF
+Route::get('/staff', [StaffController::class, 'index'])->name('staff.dashboard');
+Route::get('/staff/perizinan', [StaffController::class, 'perizinan'])->name('staff.perizinan');
+Route::post('/staff/perizinan/upload', [StaffController::class, 'uploadIzin'])->name('staff.upload');
+Route::get('/staff/slip-gaji', [StaffController::class, 'slipGaji'])->name('staff.slip_gaji');
