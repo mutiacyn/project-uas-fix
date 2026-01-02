@@ -104,7 +104,7 @@
                 <div class="col-lg-6">
                     <h1 class="display-1 mb-4 animated slideInRight"> <span class="text-primary">Selamat Datang</span></h1>
                     <h4 class="d-inline-block border border-2 border-white py-3 px-5 mb-0 animated slideInRight">
-                        Sistem Informasi Manajemen Karyawan</h4>
+                        PT Graha Cipta Mandiri</h4>
                 </div>
                 <div class="col-lg-6">
                     <div class="owl-carousel header-carousel animated fadeIn">
@@ -121,7 +121,7 @@
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Data Karyawan</h5>
+                        <h5 class="lh-base mb-0">Pembangunan perumahan</h5>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
@@ -129,7 +129,7 @@
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Absesi & Kehadiran</h5>
+                        <h5 class="lh-base mb-0">Pengelolaan apartemen</h5>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-4">
@@ -137,7 +137,7 @@
                         <div class="flex-shrink-0 btn-square border border-2 border-white me-3">
                             <i class="fa fa-robot text-primary"></i>
                         </div>
-                        <h5 class="lh-base mb-0">Manajemen Cuti & Izin</h5>
+                        <h5 class="lh-base mb-0">Manajemen fasilitas properti</h5>
                     </div>
                 </div>
                 
@@ -167,11 +167,14 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h1 class="mb-5"><span class="text-uppercase text-primary bg-light px-2">History</span> of Our
                         Creation</h1>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                        amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
-                        clita duo justo et tempor eirmod magna dolore erat amet</p>
-                    <p class="mb-5">Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no
-                        labore lorem sit. Sanctus clita duo justo et tempor.</p>
+                    <p class="mb-4">PT Graha Cipta Mandiri merupakan perusahaan yang bergerak di bidang 
+                        pengembangan dan pengelolaan properti. Perusahaan ini didirikan pada tahun 2011 dan 
+                        memulai usahanya dengan mengembangkan proyek perumahan untuk memenuhi kebutuhan 
+                        hunian masyarakat di wilayah perkotaan.</p>
+                    <p class="mb-5">Seiring dengan perkembangan perusahaan dan bertambahnya jumlah proyek, 
+                        PT Graha Cipta Mandiri terus meningkatkan kualitas manajemen dan operasional. 
+                        Hal ini dilakukan untuk mendukung pengelolaan karyawan dan proyek secara lebih 
+                        terstruktur serta meningkatkan efisiensi dan kualitas layanan perusahaan.</p>
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <h6 class="mb-3"><i class="fa fa-check text-primary me-2"></i>Award Winning</h6>
