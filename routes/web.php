@@ -12,26 +12,27 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
+// DASHBOARD
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/user', [UserController::class, 'index'])
-    ->name('user.index');
+// USER
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
 
+// GUEST
 Route::get('/home', [GuestDashboardController::class, 'index'])->name('guest.index');
 
-Route::get('/staff', function () {
-    return view('staff-dashboard');
-});
-
-Route::resource('karyawan', KaryawanController::class);
-
-Route::get('/register', fn() => view('auth.register'))
-    ->name('register');
-
+// AUTH
+Route::get('/register', fn () => view('auth.register'))->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/login', fn() => view('auth.login'))
-    ->name('login');
-
+Route::get('/login', fn () => view('auth.login'))->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+
+// KARYAWAN (ADMIN)
+Route::resource('karyawan', KaryawanController::class);
+
+// STAFF
+Route::get('/staff', [StaffController::class, 'index'])->name('staff.dashboard');
+Route::get('/staff/perizinan', [StaffController::class, 'perizinan'])->name('staff.perizinan');
+Route::post('/staff/perizinan/upload', [StaffController::class, 'uploadIzin'])->name('staff.upload');
+Route::get('/staff/slip-gaji', [StaffController::class, 'slipGaji'])->name('staff.slip_gaji');
