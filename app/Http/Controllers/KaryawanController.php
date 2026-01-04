@@ -8,6 +8,8 @@ use App\Models\Karyawan;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Division;
+use App\Models\Position;
 
 
 class KaryawanController extends Controller
@@ -17,10 +19,8 @@ class KaryawanController extends Controller
      */
     public function index()
 {
-    $dataKaryawan = Karyawan::orderBy('karyawan_id', 'desc')->paginate(10);
-    $user = Auth::user();
-
-    return view('admin.karyawan.index', compact('dataKaryawan', 'user'));
+    $karyawans = Karyawan::with(['user','divisi','jabatan'])->get();
+    return view('admin.karyawan.index', compact('karyawans'));
 }
 
 
@@ -28,44 +28,48 @@ class KaryawanController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('admin.karyawan.create');
-    }
+{
+    // Ambil semua user dengan role staff
+    $users = User::role('staff')->get();
+
+    $divisions = Division::all();
+    $positions = Position::all();
+
+    return view('admin.karyawan.create', compact('users', 'divisions', 'positions'));
+}
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'name'   => 'required',
-        'email'  => 'required|email',
-        'divisi' => 'required',
-    ]);
+    {
+        $request->validate([
+            // 'karyawan_id' => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
+            'birthday' => 'required|date',
+            'divisi_id' => 'required|exists:divisions,id', // <-- ganti 'division' jadi 'divisions'
+            'jabatan_id' => 'required|exists:positions,id', // pastikan sesuai nama tabel jabatan
+            'gender' => 'required',
+            'phone' => 'nullable|string',
+            'alamat' => 'nullable|string',
+        ]);
+              
 
-    // USER
-    $user = User::firstOrCreate(
-        ['email' => $request->email], // cek berdasarkan email
-        [
-            'name'     => $request->name,
-            'password' => Hash::make('password123'), // default
-        ]
-    );
+        Karyawan::create([
+            // 'karyawan_id' => $request->karyawan_id,
+            'user_id' => $request->user_id,
+            'birthday' => $request->birthday,
+            'divisi_id' => $request->divisi_id,
+            'jabatan_id' => $request->jabatan_id,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'alamat' => $request->alamat,
+        ]);
 
-    // KARYAWAN $karyawan->birthday = $request->birthday;
-    Karyawan::create([
-        'user_id' => $user->id,
-        'birthday' => $request->birthday,
-        'divisi'  => $request->divisi,
-        'jabatan' => $request->jabatan,
-        'gender'  => $request->gender,
-        'phone'   => $request->phone,
-    ]);
+        return redirect()->route('karyawan.index')->with('success', 'Karyawan berhasil ditambahkan!');
+    }
 
-    return redirect()->route('karyawan.index')
-    ->with('success', 'Data berhasil disimpan');
-
-}
 
 
     /**
@@ -79,40 +83,43 @@ class KaryawanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        $data['dataKaryawan'] = Karyawan::findOrFail($id);
-        return view('admin.karyawan.edit', $data);
-    }
+    public function edit(Karyawan $karyawan)
+{
+    // $users = User::all(); // Ambil semua user
+    $users = User::role('staff')->get();
+    $divisions = Division::all(); // Ambil semua divisi
+    $positions = Position::all(); // Ambil semua jabatan
+
+    return view('admin.karyawan.edit', compact('karyawan', 'users', 'divisions', 'positions'));
+}
+
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $karyawan_id = $id;
-    $karyawan = Karyawan::findOrFail($karyawan_id);
+    public function update(Request $request, Karyawan $karyawan)
+{
+    $request->validate([
+        'divisi_id' => 'required',
+        'jabatan_id' => 'required',
+        'gender' => 'required',
+    ]);
 
-    // $karyawan->nama = $request->nama;
-    $karyawan->birthday = $request->birthday;
-    $karyawan->divisi = $request->divisi;
-    $karyawan->jabatan = $request->jabatan;
-    $karyawan->gender = $request->gender;
-    // $karyawan->email = $request->email;
-    $karyawan->phone = $request->phone;
+    $karyawan->update($request->all());
 
-    $karyawan->save();
-    return redirect()->route('karyawan.index')->with('success', 'Perubahan Data Berhasil!');
-    }
+    return redirect()->route('karyawan.index')
+        ->with('success','Data karyawan diperbarui');
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        $karyawan = Karyawan::findOrFail($id);
+    public function destroy(Karyawan $karyawan)
+{
+    $karyawan->delete();
 
-        $karyawan->delete();
-        return redirect()->route('karyawan.index')->with('success', 'Data berhasil dihapus');
-    }
+    return back()->with('success','Data karyawan dihapus');
+}
 }

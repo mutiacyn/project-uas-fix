@@ -26,6 +26,11 @@
                                         <form action="{{ route('user.store') }}" method="POST">
                                             @csrf
 
+                                            <div class="mb-3">
+                                                <label>Nama</label>
+                                                <input type="text" name="name" class="form-control form-control-user" required>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label>Email</label>
                                                 <input type="email" name="email" class="form-control form-control-user"
@@ -38,25 +43,10 @@
                                                     class="form-control form-control-user" required>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label>Role</label>
-                                                <select name="role" class="form-control form-control-user" required>
-                                                    <option value="admin">Admin</option>
-                                                    <option value="karyawan" selected>Karyawan</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <select name="status" class="form-control form-control-user" required>
-                                                    <option value="aktif">Aktif</option>
-                                                    <option value="nonaktif">Nonaktif</option>
-                                                </select>
-                                            </div>
-
                                             <button class="btn btn-primary btn-user btn-block">
                                                 Simpan User
                                             </button>
+                                            <a href="{{ route('user.index') }}" class="btn btn-primary btn-user btn-block">Kembali</a>
                                         </form>
 
 

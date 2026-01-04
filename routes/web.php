@@ -6,33 +6,81 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestDashboardController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CutiController;
+/*
+|--------------------------------------------------------------------------
+| Home
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return view('welcome');
 });
 
-// DASHBOARD
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| Auth Routes (Breeze)
+|--------------------------------------------------------------------------
+*/
+require __DIR__ . '/auth.php';
 
-// USER
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
+/*
+|--------------------------------------------------------------------------
+| Dashboard Redirect (After Login)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
-// GUEST
-Route::get('/home', [GuestDashboardController::class, 'index'])->name('guest.index');
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
-// AUTH
-Route::get('/register', fn () => view('auth.register'))->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+/*
+|--------------------------------------------------------------------------
+| ADMIN ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:admin'])->group(function () {
 
-Route::get('/login', fn () => view('auth.login'))->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
+        ->name('admin.dashboard');
+        
+    Route::resource('cuti', CutiController::class);
+    Route::resource('karyawan', KaryawanController::class);
+    Route::resource('divisi', DivisionController::class);
+    Route::resource('jabatan', PositionController::class);
+    Route::resource('user', UserController::class);
+   
+});
 
-// KARYAWAN (ADMIN)
-Route::resource('karyawan', KaryawanController::class);
+/*
+|--------------------------------------------------------------------------
+| STAFF ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:staff'])->group(function () {
 
-// STAFF
-Route::get('/staff', [StaffController::class, 'index'])->name('staff.dashboard');
-Route::get('/staff/perizinan', [StaffController::class, 'perizinan'])->name('staff.perizinan');
-Route::post('/staff/perizinan/upload', [StaffController::class, 'uploadIzin'])->name('staff.upload');
-Route::get('/staff/slip-gaji', [StaffController::class, 'slipGaji'])->name('staff.slip_gaji');
+    Route::get('/staff', [StaffController::class, 'index'])
+        ->name('staff.dashboard');
+
+        Route::get('cuti/create', [CutiController::class, 'create'])->name('cuti.create');
+        Route::post('cuti', [CutiController::class, 'store'])->name('cuti.store');
+        Route::get('cuti', [CutiController::class, 'index'])->name('cuti.index');
+});
+
+/*
+|--------------------------------------------------------------------------
+| GUEST ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:guest'])->group(function () {
+
+    Route::get('/guest', [GuestDashboardController::class, 'index'])
+        ->name('guest.dashboard');
+});

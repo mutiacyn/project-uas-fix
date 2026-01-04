@@ -8,7 +8,6 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('name', 100);
             $table->string('role')->default('guest');
             $table->string('status')->default('aktif');
             $table->unsignedBigInteger('karyawan_id')->nullable();

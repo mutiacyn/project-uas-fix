@@ -83,10 +83,15 @@
 
                         <a href="{{ url('/contact') }}" class="nav-item nav-link">Contact</a>
 
-                        <!-- Login -->
-                        <a href="{{ url('/login') }}" class="nav-item nav-link fw-bold">
-                            Login
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                        
+                        <a href="#" class="nav-item nav-link fw-bold"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
                         </a>
+                        
 
                     </div>
                 </div>
@@ -102,7 +107,8 @@
         <div class="container py-5">
             <div class="row g-5 align-items-center mb-5">
                 <div class="col-lg-6">
-                    <h1 class="display-1 mb-4 animated slideInRight"> <span class="text-primary">Selamat Datang</span></h1>
+                    <h1 class="display-1 mb-4 animated slideInRight"> <span class="text-primary">Selamat Datang</span>
+                    </h1>
                     <h4 class="d-inline-block border border-2 border-white py-3 px-5 mb-0 animated slideInRight">
                         PT Graha Cipta Mandiri</h4>
                 </div>
@@ -140,7 +146,7 @@
                         <h5 class="lh-base mb-0">Manajemen fasilitas properti</h5>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -167,13 +173,13 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h1 class="mb-5"><span class="text-uppercase text-primary bg-light px-2">History</span> of Our
                         Creation</h1>
-                    <p class="mb-4">PT Graha Cipta Mandiri merupakan perusahaan yang bergerak di bidang 
-                        pengembangan dan pengelolaan properti. Perusahaan ini didirikan pada tahun 2011 dan 
-                        memulai usahanya dengan mengembangkan proyek perumahan untuk memenuhi kebutuhan 
+                    <p class="mb-4">PT Graha Cipta Mandiri merupakan perusahaan yang bergerak di bidang
+                        pengembangan dan pengelolaan properti. Perusahaan ini didirikan pada tahun 2011 dan
+                        memulai usahanya dengan mengembangkan proyek perumahan untuk memenuhi kebutuhan
                         hunian masyarakat di wilayah perkotaan.</p>
-                    <p class="mb-5">Seiring dengan perkembangan perusahaan dan bertambahnya jumlah proyek, 
-                        PT Graha Cipta Mandiri terus meningkatkan kualitas manajemen dan operasional. 
-                        Hal ini dilakukan untuk mendukung pengelolaan karyawan dan proyek secara lebih 
+                    <p class="mb-5">Seiring dengan perkembangan perusahaan dan bertambahnya jumlah proyek,
+                        PT Graha Cipta Mandiri terus meningkatkan kualitas manajemen dan operasional.
+                        Hal ini dilakukan untuk mendukung pengelolaan karyawan dan proyek secara lebih
                         terstruktur serta meningkatkan efisiensi dan kualitas layanan perusahaan.</p>
                     <div class="row g-3">
                         <div class="col-sm-6">
@@ -207,53 +213,43 @@
     <div class="container-fluid py-5">
         <div class="container">
             <div class="text-center wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="mb-5">Why People <span class="text-uppercase text-primary bg-light px-2">Choose Us</span>
+                <h1 class="mb-5">Visi & <span class="text-uppercase text-primary bg-light px-2">Misi</span>
                 </h1>
             </div>
             <div class="row g-5 align-items-center text-center">
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+                <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
                     <i class="fa fa-calendar-alt fa-5x text-primary mb-4"></i>
-                    <h4>25+ Years Experience</h4>
-                    <p class="mb-0">Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo
-                        justo et tempor eirmod magna dolore erat amet</p>
+                    <h4>Visi</h4>
+                    <p class="mb-0">Menjadi perusahaan pengembang properti terkemuka yang menghadirkan
+                        hunian berkualitas, inovatif, dan berkelanjutan bagi masyarakat perkotaan.</p>
                 </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-tasks fa-5x text-primary mb-4"></i>
-                    <h4>Best Interior Design</h4>
-                    <p class="mb-0">Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo
-                        justo et tempor eirmod magna dolore erat amet</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-pencil-ruler fa-5x text-primary mb-4"></i>
-                    <h4>Innovative Architects</h4>
-                    <p class="mb-0">Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo
-                        justo et tempor eirmod magna dolore erat amet</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.1s">
+
+                <div class="col-12 wow fadeIn" data-wow-delay="0.1s">
                     <i class="fa fa-user fa-5x text-primary mb-4"></i>
-                    <h4>Customer Satisfaction</h4>
-                    <p class="mb-0">Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo
-                        justo et tempor eirmod magna dolore erat amet</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.3s">
-                    <i class="fa fa-hand-holding-usd fa-5x text-primary mb-4"></i>
-                    <h4>Budget Friendly</h4>
-                    <p class="mb-0">Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo
-                        justo et tempor eirmod magna dolore erat amet</p>
-                </div>
-                <div class="col-md-6 col-lg-4 wow fadeIn" data-wow-delay="0.5s">
-                    <i class="fa fa-check fa-5x text-primary mb-4"></i>
-                    <h4>Sustainable Material</h4>
-                    <p class="mb-0">Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus clita duo
-                        justo et tempor eirmod magna dolore erat amet</p>
+                    <h4>Misi</h4>
+                    <p class="mb-0">
+                        Mengembangkan proyek properti yang memenuhi standar kualitas, kenyamanan, dan keamanan bagi
+                        penghuninya.
+
+                        Menerapkan manajemen proyek yang efisien untuk memastikan penyelesaian tepat waktu dan sesuai
+                        anggaran.
+
+                        Meningkatkan kepuasan pelanggan melalui layanan profesional dan inovatif.
+
+                        Memberdayakan sumber daya manusia melalui pelatihan, pengembangan kompetensi, dan lingkungan
+                        kerja yang kondusif.
+
+                        Berkontribusi pada pembangunan perkotaan yang berkelanjutan dan ramah lingkungan.
+                    </p>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Feature End -->
 
 
-    <!-- Project Start -->
+    {{-- <!-- Project Start -->
     <div class="container-fluid mt-5">
         <div class="container mt-5">
             <div class="row g-0">
@@ -325,83 +321,95 @@
             </div>
         </div>
     </div>
-    <!-- Project End -->
+    <!-- Project End --> --}}
 
 
     <!-- Service Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
+            <div class="text-center wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="mb-5"><span class="text-uppercase text-primary bg-light px-2">Our</span> of Team</h1>
+            </div>
             <div class="row g-5 align-items-center">
-                <div class="col-lg-5 wow fadeIn" data-wow-delay="0.1s">
-                    <h1 class="mb-5">Our Creative <span
-                            class="text-uppercase text-primary bg-light px-2">Services</span></h1>
-                    <p>Aliqu diam
-                        amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
-                        clita duo justo et tempor eirmod magna dolore erat amet</p>
-                    <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor sit. Aliqu diam
-                        amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit. Sanctus
-                        clita duo justo et tempor eirmod magna dolore erat amet</p>
-                    <div class="d-flex align-items-center bg-light">
-                        <div class="btn-square flex-shrink-0 bg-primary" style="width: 100px; height: 100px;">
-                            <i class="fa fa-phone fa-2x text-white"></i>
-                        </div>
-                        <div class="px-3">
-                            <h3>+0123456789</h3>
-                            <span>Call us direct 24/7 for get a free consultation</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7">
-                    <div class="row g-0">
-                        <div class="col-md-6 wow fadeIn" data-wow-delay="0.2s">
-                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-primary">
-                                <a href="#!" class="service-img position-relative mb-4">
-                                    <img class="img-fluid w-100" src="{{ asset('assets-guest/img/service-1.jpg') }}">
-                                    <h3>Interior Design</h3>
+                <div class="col-lg-12">
+                    <div class="row g-3"> <!-- g-3 = jarak lebih kecil -->
+                        
+                        <!-- Kolom 1 -->
+                        <div class="col-md-4 wow fadeIn" data-wow-delay="0.2s">
+                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-primary text-white p-4 rounded shadow">
+                                <a class="service-img position-relative mb-3">
+                                    <img class="img-fluid w-100 rounded" src="{{ asset('assets-guest/img/service-1.jpg') }}">
+                                    <h3 class="mt-0">Pengembangan Properti</h3>
                                 </a>
-                                <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-                                    diam
-                                    stet diam sed stet lorem.</p>
+                                <p class="mb-0">Bertanggung jawab atas perencanaan, desain, dan pelaksanaan proyek perumahan dan properti lainnya.</p>
                             </div>
                         </div>
-                        <div class="col-md-6 wow fadeIn" data-wow-delay="0.4s">
-                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-light">
-                                <a href="#!" class="service-img position-relative mb-4">
-                                    <img class="img-fluid w-100" src="{{ asset('assets-guest/img/service-2.jpg') }}">
-                                    <h3>Implement</h3>
+    
+                        <!-- Kolom 2 -->
+                        <div class="col-md-4 wow fadeIn" data-wow-delay="0.4s">
+                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-light p-4 rounded shadow">
+                                <a  class="service-img position-relative mb-3">
+                                    <img class="img-fluid w-100 rounded" src="{{ asset('assets-guest/img/service-2.jpg') }}">
+                                    <h3 class="mt-0">Manajemen Proyek</h3>
                                 </a>
-                                <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-                                    diam
-                                    stet diam sed stet lorem.</p>
+                                <p class="mb-0">Mengelola proyek properti agar selesai tepat waktu, sesuai anggaran, dan berkualitas.</p>
                             </div>
                         </div>
-                        <div class="col-md-6 wow fadeIn" data-wow-delay="0.6s">
-                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-light">
-                                <a href="#!" class="service-img position-relative mb-4">
-                                    <img class="img-fluid w-100" src="{{ asset('assets-guest/img/service-3.jpg') }}">
-                                    <h3>Renovation</h3>
+    
+                        <!-- Kolom 3 -->
+                        <div class="col-md-4 wow fadeIn" data-wow-delay="0.6s">
+                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-primary text-white p-4 rounded shadow">
+                                <a class="service-img position-relative mb-3">
+                                    <img class="img-fluid w-100 rounded" src="{{ asset('assets-guest/img/service-3.jpg') }}">
+                                    <h3 class="mt-0">Pemasaran & Penjualan</h3>
                                 </a>
-                                <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-                                    diam
-                                    stet diam sed stet lorem.</p>
+                                <p class="mb-0">Meningkatkan penjualan properti melalui strategi pemasaran yang efektif.</p>
                             </div>
                         </div>
-                        <div class="col-md-6 wow fadeIn" data-wow-delay="0.8s">
-                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-primary">
-                                <a href="#!" class="service-img position-relative mb-4">
-                                    <img class="img-fluid w-100" src="{{ asset('assets-guest/img/service-4.jpg') }}">
-                                    <h3>Commercial</h3>
+    
+                        <!-- Baris kedua -->
+                        <div class="col-md-4 wow fadeIn" data-wow-delay="0.8s">
+                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-light p-4 rounded shadow">
+                                <a class="service-img position-relative mb-3">
+                                    <img class="img-fluid w-100 rounded" src="{{ asset('assets-guest/img/service-4.jpg') }}">
+                                    <h3 class="mt-0">Keuangan</h3>
                                 </a>
-                                <p class="mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed
-                                    diam
-                                    stet diam sed stet lorem.</p>
+                                <p class="mb-0">Mengelola aspek keuangan proyek dengan transparansi dan akuntabilitas.</p>
                             </div>
                         </div>
+    
+                        <div class="col-md-4 wow fadeIn" data-wow-delay="1s">
+                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-primary text-white p-4 rounded shadow">
+                                <a class="service-img position-relative mb-3">
+                                    <img class="img-fluid w-100 rounded" src="{{ asset('assets-guest/img/service-5.jpg') }}">
+                                    <h3 class="mt-0">Sumber Daya Manusia</h3>
+                                </a>
+                                <p class="mb-0">Mengelola rekrutmen, pelatihan, pengembangan karyawan, dan menjaga kepuasan serta produktivitas tim.</p>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-4 wow fadeIn" data-wow-delay="1.2s">
+                            <div class="service-item h-100 d-flex flex-column justify-content-center bg-light p-4 rounded shadow">
+                                <a class="service-img position-relative mb-3">
+                                    <img class="img-fluid w-100 rounded" src="{{ asset('assets-guest/img/service-6.jpg') }}">
+                                    <h3 class="mt-0">Legal & Kepatuhan</h3>
+                                </a>
+                                <p class="mb-0">Menangani aspek hukum, perizinan, kontrak, dan memastikan semua kegiatan perusahaan sesuai regulasi yang berlaku.</p>
+                            </div>
+                        </div>
+    
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <style>
+    .service-item {
+        width: 100%; /* memaksimalkan lebar kolom */
+    }
+    </style>
+    
     <!-- Service End -->
 
 
@@ -409,14 +417,14 @@
     <div class="container-fluid bg-light py-5">
         <div class="container py-5">
             <h1 class="mb-5">Our Professional <span
-                    class="text-uppercase text-primary bg-light px-2">Designers</span>
+                    class="text-uppercase text-primary bg-light px-2">Staff</span>
             </h1>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.1s">
                     <div class="team-item position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{ asset('assets-guest/img/team-1.jpg') }}">
                         <div class="team-overlay">
-                            <small class="mb-2">Architect</small>
+                            <small class="mb-2">CEO</small>
                             <h4 class="lh-base text-light">Boris Johnson</h4>
                             <div class="d-flex justify-content-center">
                                 <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
@@ -439,7 +447,7 @@
                     <div class="team-item position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{ asset('assets-guest/img/team-2.jpg') }}">
                         <div class="team-overlay">
-                            <small class="mb-2">Architect</small>
+                            <small class="mb-2">COO</small>
                             <h4 class="lh-base text-light">Donald Pakura</h4>
                             <div class="d-flex justify-content-center">
                                 <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
@@ -462,7 +470,7 @@
                     <div class="team-item position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{ asset('assets-guest/img/team-3.jpg') }}">
                         <div class="team-overlay">
-                            <small class="mb-2">Architect</small>
+                            <small class="mb-2">CFO</small>
                             <h4 class="lh-base text-light">Bradley Gordon</h4>
                             <div class="d-flex justify-content-center">
                                 <a class="btn btn-outline-primary btn-sm-square border-2 me-2" href="#!">
@@ -511,7 +519,7 @@
 
 
     <!-- Testimonial Start -->
-    <div class="container-xxl py-5">
+    {{-- <div class="container-xxl py-5">
         <div class="container py-5">
             <div class="row justify-content-center">
                 <div class="col-md-12 col-lg-9">
@@ -520,7 +528,8 @@
                             <div class="row g-5 align-items-center">
                                 <div class="col-md-6">
                                     <div class="testimonial-img">
-                                        <img class="img-fluid" src="{{ asset('assets-guest/img/testimonial-1.jpg') }}">
+                                        <img class="img-fluid"
+                                            src="{{ asset('assets-guest/img/testimonial-1.jpg') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -539,7 +548,8 @@
                             <div class="row g-5 align-items-center">
                                 <div class="col-md-6">
                                     <div class="testimonial-img">
-                                        <img class="img-fluid" src="{{ asset('assets-guest/img/testimonial-2.jpg') }}">
+                                        <img class="img-fluid"
+                                            src="{{ asset('assets-guest/img/testimonial-2.jpg') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -558,7 +568,8 @@
                             <div class="row g-5 align-items-center">
                                 <div class="col-md-6">
                                     <div class="testimonial-img">
-                                        <img class="img-fluid" src="{{ asset('assets-guest/img/testimonial-3.jpg') }}">
+                                        <img class="img-fluid"
+                                            src="{{ asset('assets-guest/img/testimonial-3.jpg') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -577,12 +588,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Testimonial End -->
 
 
     <!-- Newsletter Start -->
-    <div class="container-fluid bg-primary newsletter p-0">
+    {{-- <div class="container-fluid bg-primary newsletter p-0">
         <div class="container p-0">
             <div class="row g-0 align-items-center">
                 <div class="col-md-5 ps-lg-0 text-start wow fadeIn" data-wow-delay="0.2s">
@@ -603,7 +614,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Newsletter End -->
 
 

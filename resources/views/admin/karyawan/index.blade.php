@@ -21,13 +21,14 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Nama</th>
-                                <th>ID Karyawan</th>
+                                {{-- <th>ID Karyawan</th> --}}
                                 <th>Birthday</th>
                                 <th>Divisi</th>
                                 <th>Jabatan</th>
                                 <th>Gender</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Alamat</th>
                                 {{-- <th>Status</th> --}}
                                 <th>Action</th>
                             </tr>
@@ -43,27 +44,22 @@
                         </tr>
                     </tfoot> --}}
                         <tbody>
-                            @foreach ($dataKaryawan as $index => $item)
-                                <tr>
-                                    <td>{{ $dataKaryawan->firstItem() + $index }}</td>
-                                    <td>{{ $item->user->name ?? '-' }}</td>
-                                    <td>{{ $item->karyawan_id }}</td>
-                                    <td>{{ $item->birthday }}</td>
-                                    <td>{{ $item->divisi }}</td>
-                                    <td>{{ $item->jabatan }}</td>
-                                    <td>{{ $item->gender }}</td>
-                                    <td>{{ $item->user->email ?? '-' }}</td>
-                                    <td>{{ $item->phone }}</td>
-                                    {{-- <td>
-                                        @if ($item->status == 'aktif')
-                                            <span class="badge badge-primary">Aktif</span>
-                                        @else
-                                            <span class="badge badge-danger">Tidak Aktif</span>
-                                        @endif
-                                    </td>                                     --}}
+                            @foreach($karyawans as $k)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $k->user->name }}</td>
+                                {{-- <td>{{ $k->karyawan_id }}</td> --}}
+                                <td>{{ $k->birthday }}</td>
+                                <td>{{ $k->divisi->nama_divisi }}</td>
+                                <td>{{ $k->jabatan->nama_jabatan }} (Lv {{ $k->jabatan->level }})</td>
+                                <td>{{ $k->gender }}</td>
+                                <td>{{ $k->user->email }}</td>
+                                <td>{{ $k->phone }}</td>
+                                <td>{{ $k->alamat }}</td>
+                                    
                                     <td>
 
-                                        <a href="{{ route('karyawan.edit', $item->karyawan_id) }}"
+                                        <a href="{{ route('karyawan.edit',$k) }}"
                                             class="btn btn-info btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-info-circle"></i>
@@ -72,7 +68,7 @@
                                         </a>
 
 
-                                        <form action="{{ route('karyawan.destroy', $item->karyawan_id) }}" method="POST"
+                                        <form action="{{ route('karyawan.destroy',$k) }}" method="POST"
                                             style="display:inline">
 
                                             @csrf

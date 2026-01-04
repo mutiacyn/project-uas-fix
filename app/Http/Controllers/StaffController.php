@@ -10,12 +10,12 @@ class StaffController extends Controller
     public function index()
     {
         $riwayatCuti = session()->get('riwayat_cuti', []);
-        return view('staff-dashboard', compact('riwayatCuti'));
+        return view('staff.staff-dashboard', compact('riwayatCuti'));
     }
 
     public function perizinan()
     {
-        return view('staff-perizinan');
+        return view('staff.staff-perizinan');
     }
 
     public function uploadIzin(Request $request)
@@ -60,6 +60,7 @@ class StaffController extends Controller
         
         $totalGaji = $dataGaji['gaji_pokok'] + $dataGaji['tunjangan'] - $dataGaji['potongan'];
 
-        return view('staff-slip-gaji', compact('dataGaji', 'totalGaji'));
+        return view('staff.staff-slip-gaji', compact('dataGaji', 'totalGaji'));
     }
+    
 }
