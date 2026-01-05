@@ -12,7 +12,6 @@ class Cuti extends Model
     protected $fillable = [
         'user_id',
         'jenis',
-        'sub_jenis',
         'tanggal_mulai',
         'tanggal_selesai',
         'alasan',

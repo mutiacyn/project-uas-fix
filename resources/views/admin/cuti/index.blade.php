@@ -1,55 +1,97 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container-fluid">
+<div class="container">
+    <h3 class="mb-4">Daftar Pengajuan Cuti</h3>
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Data Karyawan</h1>
-            <a href="{{ route('karyawan.create') }}"class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Tambah Karyawan</a>
-        </div>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @elseif(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Data Karyawan</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Pegawai</th>
+                <th>Tanggal Pengajuan</th>
+                <th>Tanggal Mulai</th>
+                <th>Tanggal Selesai</th>
+                <th>Durasi</th>
+                <th>Jenis</th>
+                <th>Status</th>
+                <th>File</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($riwayatCuti as $cuti)
+            <tr>
+                <!-- Pegawai -->
+                <td>{{ $cuti->user->name }}</td>
+
+                <!-- Tanggal Pengajuan -->
+                <td>{{ $cuti->created_at->format('d M Y') }}</td>
+
+                <!-- Tanggal Mulai & Selesai -->
+                <td>{{ $cuti->tanggal_mulai }}</td>
+                <td>{{ $cuti->tanggal_selesai }}</td>
+
+                <!-- Durasi dalam hari -->
+                <td>
+                    {{ \Carbon\Carbon::parse($cuti->tanggal_mulai)
+                        ->diffInDays(\Carbon\Carbon::parse($cuti->tanggal_selesai)) + 1 }} Hari
+                </td>
+
+                <!-- Jenis Cuti -->
+                <td>{{ $cuti->jenis }}</td>
+
+
+                <!-- Status -->
+                <td>
+                    <span class="badge 
+                        @if($cuti->status == 'Pending') bg-warning
+                        @elseif($cuti->status == 'Approved') bg-success
+                        @elseif($cuti->status == 'Rejected') bg-danger
+                        @else bg-secondary
+                        @endif">
+                        {{ $cuti->status }}
+                    </span>
+                </td>
+
+                <!-- File -->
+                <td>
+                    @if($cuti->file)
+                        <a href="{{ asset('storage/cuti/' . $cuti->file) }}" target="_blank">Lihat File</a>
+                    @else
+                        -
                     @endif
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Tanggal Pengajuan</th>
-                                <th>Rentang Cuti</th>
-                                <th>Jenis</th>
-                                <th>Durasi</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            @forelse($riwayatCuti as $cuti)
-                            <tr>
-                                <td>{{ $cuti['tanggal_pengajuan'] }}</td>
-                                <td><small class="text-muted">{{ $cuti['tgl_mulai'] ?? '-' }} s/d {{ $cuti['tgl_selesai'] ?? '-' }}</small></td>
-                                <td>{{ $cuti['jenis'] }}</td>
-                                <td><span class="badge bg-info text-white">{{ $cuti['durasi'] }} Hari</span></td>
-                                <td><span class="badge bg-{{ $cuti['warna'] }}">{{ $cuti['status'] }}</span></td>
-                            </tr>
-                            @empty
-                            <tr><td colspan="5" class="text-center text-muted">Belum ada riwayat.</td></tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+                </td>
 
-    </div>
+                <!-- Aksi (Approve / Reject) -->
+                <td>
+                    @if($cuti->status == 'Pending')
+                        <form action="{{ route('admin.cuti.approve', $cuti->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('PUT')
+                            <button class="btn btn-success btn-sm">Approve</button>
+                        </form>
+                        <form action="{{ route('admin.cuti.reject', $cuti->id) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('PUT')
+                            <button class="btn btn-danger btn-sm">Reject</button>
+                        </form>
+                    @else
+                        -
+                    @endif
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="10" class="text-center text-muted">Belum ada pengajuan cuti.</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endsection

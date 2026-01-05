@@ -15,8 +15,46 @@
                 <h6 class="m-0 font-weight-bold text-primary">Data Karyawan</h6>
             </div>
             <div class="card-body">
+                <form action="{{ route('karyawan.index') }}" method="GET" class="mb-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <input type="text" name="search" class="form-control" placeholder="Cari Nama atau Email..." value="{{ request('search') }}">
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <select name="divisi_id" class="form-control">
+                                <option value="">-- Semua Divisi --</option>
+                                @foreach($divisis as $divisi)
+                                    <option value="{{ $divisi->id }}" {{ request('divisi_id') == $divisi->id ? 'selected' : '' }}>
+                                        {{ $divisi->nama_divisi }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <select name="jabatan_id" class="form-control">
+                                <option value="">-- Semua Jabatan --</option>
+                                @foreach($jabatans as $jabatan)
+                                    <option value="{{ $jabatan->id }}" {{ request('jabatan_id') == $jabatan->id ? 'selected' : '' }}>
+                                        {{ $jabatan->nama_jabatan }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary w-100 mb-2">Cari</button>
+                            @if(request()->has('search') || request()->has('divisi_id') || request()->has('jabatan_id'))
+                                <a href="{{ route('karyawan.index') }}" class="btn btn-danger w-100">Reset</a>
+                            @endif
+                        </div>
+                    </div>
+                </form>
+
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -86,9 +124,18 @@
 
                                     </td>
                                 </tr>
+                                @empty
+                            <tr>
+                                <td colspan="10" class="text-center">Data tidak ditemukan.</td>
+                            </tr>
+                            @endforelse
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="d-flex justify-content-end mt-3">
+                    {{-- withQueryString() berguna agar saat pindah halaman, filter search tetap ada --}}
+                    {{ $karyawans->withQueryString()->links() }} 
                 </div>
             </div>
         </div>

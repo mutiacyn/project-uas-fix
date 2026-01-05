@@ -2,57 +2,66 @@
 
 @section('content')
 <div class="container">
-    <h2>Daftar Pengajuan</h2>
+    <h3 class="mb-4">Riwayat Cuti Saya</h3>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
+    @elseif(session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Staff</th>
-                <th>Jenis</th>
-                <th>Sub-Jenis</th>
+                <th>Tanggal Pengajuan</th>
                 <th>Tanggal Mulai</th>
                 <th>Tanggal Selesai</th>
-                <th>Alasan</th>
-                <th>Berkas</th>
+                <th>Jenis</th>
                 <th>Status</th>
-                @role('admin')<th>Aksi</th>@endrole
+                <th>File</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($cuti as $c)
+            @forelse($riwayatCuti as $cuti)
             <tr>
-                <td>{{ $c->user->name }}</td>
-                <td>{{ $c->jenis }}</td>
-                <td>{{ $c->sub_jenis }}</td>
-                <td>{{ $c->tanggal_mulai }}</td>
-                <td>{{ $c->tanggal_selesai ?? '-' }}</td>
-                <td>{{ $c->alasan }}</td>
+                <!-- Tanggal Pengajuan -->
+                <td>{{ $cuti->created_at->format('d M Y') }}</td>
+
+                <!-- Tanggal Mulai & Selesai -->
+                <td>{{ $cuti->tanggal_mulai }}</td>
+                <td>{{ $cuti->tanggal_selesai }}</td>
+
+                
+
+                <!-- Jenis Cuti -->
+                <td>{{ $cuti->jenis }}</td>
+
+                <!-- Status -->
                 <td>
-                    @if($c->file)
-                        <a href="{{ asset('storage/cuti_files/'.$c->file) }}" target="_blank">Lihat Berkas</a>
+                    <span class="badge 
+                        @if($cuti->status == 'Pending') bg-warning
+                        @elseif($cuti->status == 'Approved') bg-success
+                        @elseif($cuti->status == 'Rejected') bg-danger
+                        @else bg-secondary
+                        @endif">
+                        {{ $cuti->status }}
+                    </span>
+                </td>
+
+                <!-- File -->
+                <td>
+                    @if($cuti->file)
+                        <a href="{{ asset('storage/cuti/' . $cuti->file) }}" target="_blank">Lihat File</a>
                     @else
                         -
                     @endif
                 </td>
-                <td>{{ $c->status }}</td>
-                @role('admin')
-                <td>
-                    <form action="{{ route('cuti.updateStatus', $c->id) }}" method="POST">
-                        @csrf
-                        <select name="status" onchange="this.form.submit()">
-                            <option value="Pending" {{ $c->status=='Pending'?'selected':'' }}>Pending</option>
-                            <option value="Approved" {{ $c->status=='Approved'?'selected':'' }}>Approved</option>
-                            <option value="Rejected" {{ $c->status=='Rejected'?'selected':'' }}>Rejected</option>
-                        </select>
-                    </form>
-                </td>
-                @endrole
             </tr>
-            @endforeach
+            @empty
+            <tr>
+                <td colspan="8" class="text-center text-muted">Belum ada riwayat cuti.</td>
+            </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

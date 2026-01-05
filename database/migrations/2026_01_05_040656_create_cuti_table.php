@@ -6,27 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('cuti', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('jenis');        // Cuti / Izin
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // relasi ke users
+            $table->string('jenis');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai')->nullable();
             $table->text('alasan');
-            $table->string('file')->nullable(); // file dokumen
-            $table->enum('status', ['Pending', 'Approved', 'Rejected'])->default('Pending');
+            $table->string('file')->nullable();
+            $table->enum('status', ['Pending','Approved','Rejected'])->default('Pending');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('cuti');

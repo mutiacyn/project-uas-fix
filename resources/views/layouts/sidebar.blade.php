@@ -189,12 +189,12 @@
             </a>
         </li>
         
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link" href="{{ route('staff.slip_gaji') }}">
                 <i class="fas fa-fw fa-file-invoice-dollar"></i>
                 <span>Slip Gaji</span>
             </a>
-        </li>
+        </li> --}}
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">

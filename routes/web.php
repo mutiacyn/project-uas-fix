@@ -32,55 +32,46 @@ require __DIR__ . '/auth.php';
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])
-        ->name('dashboard');
 
-    // Profile
+    // Dashboard & Profile
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-/*
-|--------------------------------------------------------------------------
-| ADMIN ROUTES
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'role:admin'])->group(function () {
+    // ===================== CUTI =====================
+    Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');          // semua login
+    Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create'); // semua login
+    Route::post('/cuti', [CutiController::class, 'store'])->name('cuti.store');         // semua login
 
-    Route::get('/admin/dashboard', [DashboardController::class, 'admin'])
-        ->name('admin.dashboard');
-        
-    Route::resource('cuti', CutiController::class);
-    Route::resource('karyawan', KaryawanController::class);
-    Route::resource('divisi', DivisionController::class);
-    Route::resource('jabatan', PositionController::class);
-    Route::resource('user', UserController::class);
-   
-});
+    // Admin-only cuti
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/cuti/{cuti}/edit', [CutiController::class, 'edit'])->name('cuti.edit');
+        Route::put('/cuti/{cuti}', [CutiController::class, 'update'])->name('cuti.update');
+        Route::delete('/cuti/{cuti}', [CutiController::class, 'destroy'])->name('cuti.destroy');
+    });
 
-/*
-|--------------------------------------------------------------------------
-| STAFF ROUTES
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'role:staff'])->group(function () {
+    // ===================== ADMIN =====================
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin/dashboard', [DashboardController::class, 'admin'])->name('admin.dashboard');
+        Route::resource('karyawan', KaryawanController::class);
+        Route::resource('divisi', DivisionController::class);
+        Route::resource('jabatan', PositionController::class);
+        Route::resource('user', UserController::class);
+        Route::put('/cuti/{cuti}/approve', [CutiController::class, 'approve'])->name('admin.cuti.approve');
+        Route::put('/cuti/{cuti}/reject', [CutiController::class, 'reject'])->name('admin.cuti.reject');
+    });
 
-    Route::get('/staff', [StaffController::class, 'index'])
-        ->name('staff.dashboard');
+    // ===================== STAFF =====================
+    Route::middleware('role:staff')->group(function () {
+        Route::get('/staff', [StaffController::class, 'index'])->name('staff.dashboard');
+        Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
+    Route::post('/cuti', [CutiController::class, 'store'])->name('cuti.store');
+    });
 
-        Route::get('cuti/create', [CutiController::class, 'create'])->name('cuti.create');
-        Route::post('cuti', [CutiController::class, 'store'])->name('cuti.store');
-        Route::get('cuti', [CutiController::class, 'index'])->name('cuti.index');
-});
+    // ===================== GUEST =====================
+    Route::middleware('role:guest')->group(function () {
+        Route::get('/guest', [GuestDashboardController::class, 'index'])->name('guest.dashboard');
+    });
 
-/*
-|--------------------------------------------------------------------------
-| GUEST ROUTES
-|--------------------------------------------------------------------------
-*/
-Route::middleware(['auth', 'role:guest'])->group(function () {
-
-    Route::get('/guest', [GuestDashboardController::class, 'index'])
-        ->name('guest.dashboard');
 });
