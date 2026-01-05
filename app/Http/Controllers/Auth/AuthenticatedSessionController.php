@@ -45,8 +45,8 @@ public function store(LoginRequest $request)
     $user = Auth::user();
 
     if ($user->hasRole('admin')) {
-        return redirect()->route('admin.dashboard'); // ganti sesuai route admin
-    } elseif ($user->hasRole('cuti')) {
+        return redirect()->route('karyawan.index'); // ganti sesuai route admin
+    } elseif ($user->hasRole('staff')) {
         return redirect()->route('cuti.store');
     } else {
         return redirect()->route('guest.dashboard');

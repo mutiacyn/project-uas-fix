@@ -53,7 +53,6 @@ Route::middleware(['auth'])->group(function () {
 
     // ===================== ADMIN =====================
     Route::middleware('role:admin')->group(function () {
-        Route::get('/admin/dashboard', [DashboardController::class, 'admin'])->name('admin.dashboard');
         Route::resource('karyawan', KaryawanController::class);
         Route::resource('divisi', DivisionController::class);
         Route::resource('jabatan', PositionController::class);
@@ -61,12 +60,12 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/cuti/{cuti}/approve', [CutiController::class, 'approve'])->name('admin.cuti.approve');
         Route::put('/cuti/{cuti}/reject', [CutiController::class, 'reject'])->name('admin.cuti.reject');
     });
-
+ 
     // ===================== STAFF =====================
     Route::middleware('role:staff')->group(function () {
+        // Staff dashboard sekaligus menampung form cuti
         Route::get('/staff', [StaffController::class, 'index'])->name('staff.dashboard');
-        Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
-    Route::post('/cuti', [CutiController::class, 'store'])->name('cuti.store');
+        Route::post('/staff/cuti', [CutiController::class, 'store'])->name('staff.cuti.store');
     });
 
     // ===================== GUEST =====================

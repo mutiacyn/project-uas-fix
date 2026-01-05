@@ -11,11 +11,11 @@ class DashboardController extends Controller
         $user = Auth::user();
 
         if ($user->hasRole('admin')) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('karyawan.index');
         }
 
         if ($user->hasRole('staff')) {
-            return redirect()->route('staff.dashboard');
+            return redirect()->route('cuti.store');
         }
 
         return redirect()->route('guest.dashboard');
