@@ -75,7 +75,8 @@
                     <tbody>
                         @forelse($karyawans as $k)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $loop->iteration + ($karyawans->currentPage()-1) * $karyawans->perPage() }}</td>
+
                             <td>{{ $k->user->name }}</td>
                             <td>{{ $k->birthday }}</td>
                             <td>{{ $k->divisi->nama_divisi }}</td>
@@ -116,9 +117,10 @@
 
             <!-- Pagination -->
             <div class="d-flex justify-content-end mt-3">
-                {{ $karyawans->withQueryString()->links() }}
+                {{ $karyawans->withQueryString()->onEachSide(1)->links('pagination::simple-bootstrap-5') }}
             </div>
 
+            
         </div>
     </div>
 

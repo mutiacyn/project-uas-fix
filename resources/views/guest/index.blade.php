@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Humenta</title>
+    <title>Cipta Mandiri</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -50,7 +50,7 @@
 
                 <!-- Brand -->
                 <a href="{{ url('/') }}" class="navbar-brand">
-                    <h1 class="mb-0">Humenta</h1>
+                    <h1 class="mb-0">Cipta Mandiri</h1>
                 </a>
 
                 <!-- Toggle -->
@@ -64,24 +64,10 @@
                     <div class="navbar-nav ms-auto">
 
                         <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ url('/about') }}" class="nav-item nav-link">About</a>
-                        <a href="{{ url('/services') }}" class="nav-item nav-link">Services</a>
-                        <a href="{{ url('/projects') }}" class="nav-item nav-link">Projects</a>
+                        \
 
                         <!-- Dropdown -->
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                                Pages
-                            </a>
-                            <div class="dropdown-menu bg-light mt-2">
-                                <a href="{{ url('/features') }}" class="dropdown-item">Features</a>
-                                <a href="{{ url('/team') }}" class="dropdown-item">Our Team</a>
-                                <a href="{{ url('/testimonial') }}" class="dropdown-item">Testimonial</a>
-                                <a href="{{ url('/404') }}" class="dropdown-item">404 Page</a>
-                            </div>
-                        </div>
-
-                        <a href="{{ url('/contact') }}" class="nav-item nav-link">Contact</a>
+                        
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf

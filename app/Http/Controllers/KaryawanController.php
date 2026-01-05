@@ -36,7 +36,7 @@ class KaryawanController extends Controller
             $query->where('divisi_id', $request->divisi_id);
         }
 
-        // 4. Logika FILTER JABATAN
+        // 4. Logika FILTER JABATAN {{ $user->name }} - {{ $user->email }}
         if ($request->filled('jabatan_id')) {
             $query->where('jabatan_id', $request->jabatan_id);
         }
@@ -47,6 +47,8 @@ class KaryawanController extends Controller
 
         // 6. Ambil data Divisi dan Jabatan untuk Dropdown Filter di View
         // (Saya namakan variabelnya $divisis dan $jabatans agar sesuai dengan view sebelumnya)
+
+        
         $divisis = Division::all();
         $jabatans = Position::all();
 

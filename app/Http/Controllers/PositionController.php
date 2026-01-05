@@ -51,6 +51,7 @@ class PositionController extends Controller
     public function destroy($id)
     {
         Position::findOrFail($id)->delete();
+        
         return redirect()->route('jabatan.index')
             ->with('success','Jabatan berhasil dihapus');
     }
