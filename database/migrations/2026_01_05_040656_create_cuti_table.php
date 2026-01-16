@@ -14,7 +14,6 @@ return new class extends Migration
             $table->string('jenis');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai')->nullable();
-            $table->text('alasan');
             $table->string('file')->nullable();
             $table->enum('status', ['Pending','Approved','Rejected'])->default('Pending');
             $table->timestamps();
