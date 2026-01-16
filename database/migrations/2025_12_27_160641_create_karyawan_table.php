@@ -12,15 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('karyawan', function (Blueprint $table) {
-            $table->increments('karyawan_id');
-            $table->string('name', 100);
-            $table->string('divisi', 100);
-            $table->string('jabatan', 100);
+            $table->id('karyawan_id'); 
             $table->date('birthday')->nullable();
-            $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
-            // $table->string('email')->unique();
+            $table->string('gender', 10)->nullable();
             $table->string('phone', 20)->nullable();
-            $table->timestamps();
+            $table->timestamps(); // created_at & updated_at
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('divisi_id')->nullable();
+            $table->unsignedBigInteger('jabatan_id')->nullable();
+            $table->string('alamat')->nullable();
+
+            // Optional: foreign key constraints
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('divisi_id')->references('id')->on('divisions')->onDelete('set null');
+            $table->foreign('jabatan_id')->references('id')->on('positions')->onDelete('set null');
         });
     }
 
