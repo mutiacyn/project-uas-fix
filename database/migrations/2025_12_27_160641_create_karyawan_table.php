@@ -23,9 +23,10 @@ return new class extends Migration
             $table->string('alamat')->nullable();
 
             // Optional: foreign key constraints
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('divisi_id')->references('id')->on('divisions')->onDelete('set null');
-            $table->foreign('jabatan_id')->references('id')->on('positions')->onDelete('set null');
+            $table->foreignId('divisi_id')->nullable()->constrained('divisions')->nullOnDelete();
+            $table->foreignId('jabatan_id')->nullable()->constrained('positions')->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
+
         });
     }
 
