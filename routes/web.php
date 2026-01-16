@@ -16,7 +16,7 @@ use App\Http\Controllers\CutiController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('guest/index');
 });
 
 /*

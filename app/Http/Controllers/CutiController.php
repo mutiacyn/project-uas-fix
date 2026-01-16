@@ -97,7 +97,6 @@ class CutiController extends Controller
             'file' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
         ]);
 
-        // Hitung ulang durasi jika tanggal berubah TANPA Carbon
         if ($request->tanggal_selesai) {
             $mulai = strtotime($request->tanggal_mulai);
             $selesai = strtotime($request->tanggal_selesai);

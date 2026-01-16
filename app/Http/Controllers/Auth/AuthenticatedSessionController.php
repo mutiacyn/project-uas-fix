@@ -48,9 +48,7 @@ public function store(LoginRequest $request)
         return redirect()->route('karyawan.index'); // ganti sesuai route admin
     } elseif ($user->hasRole('staff')) {
         return redirect()->route('cuti.store');
-    } else {
-        return redirect()->route('guest.dashboard');
-    }
+    } 
 }
 
     /**

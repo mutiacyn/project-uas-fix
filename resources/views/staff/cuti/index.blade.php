@@ -18,7 +18,7 @@
                 <th>Tanggal Selesai</th>
                 <th>Jenis</th>
                 <th>Status</th>
-                <th>File</th>
+                {{-- <th>File</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -49,13 +49,13 @@
                 </td>
 
                 <!-- File -->
-                <td>
+                {{-- <td>
                     @if($cuti->file)
                         <a href="{{ asset('storage/cuti/' . $cuti->file) }}" target="_blank">Lihat File</a>
                     @else
                         -
                     @endif
-                </td>
+                </td> --}}
             </tr>
             @empty
             <tr>

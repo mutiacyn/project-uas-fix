@@ -64,7 +64,7 @@
                     <div class="navbar-nav ms-auto">
 
                         <a href="{{ url('/') }}" class="nav-item nav-link active">Home</a>
-                        \
+                        
 
                         <!-- Dropdown -->
                         
@@ -75,7 +75,7 @@
                         
                         <a href="#" class="nav-item nav-link fw-bold"
                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Logout
+                            Login
                         </a>
                         
 

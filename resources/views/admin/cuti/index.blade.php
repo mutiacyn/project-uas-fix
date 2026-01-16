@@ -20,7 +20,7 @@
                 <th>Durasi</th>
                 <th>Jenis</th>
                 <th>Status</th>
-                <th>File</th>
+                {{-- <th>File</th> --}}
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -60,13 +60,13 @@
                 </td>
 
                 <!-- File -->
-                <td>
+                {{-- <td>
                     @if($cuti->file)
                         <a href="{{ asset('storage/cuti/' . $cuti->file) }}" target="_blank">Lihat File</a>
                     @else
                         -
                     @endif
-                </td>
+                </td> --}}
 
                 <!-- Aksi (Approve / Reject) -->
                 <td>
