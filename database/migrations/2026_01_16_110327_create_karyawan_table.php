@@ -16,17 +16,13 @@ return new class extends Migration
             $table->date('birthday')->nullable();
             $table->string('gender', 10)->nullable();
             $table->string('phone', 20)->nullable();
-            $table->timestamps(); // created_at & updated_at
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('divisi_id')->nullable();
-            $table->unsignedBigInteger('jabatan_id')->nullable();
             $table->string('alamat')->nullable();
+            $table->timestamps();
 
-            // Optional: foreign key constraints
+            // Foreign keys (hanya sekali, pakai foreignId)
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->foreignId('divisi_id')->nullable()->constrained('divisions')->nullOnDelete();
             $table->foreignId('jabatan_id')->nullable()->constrained('positions')->nullOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnDelete();
-
         });
     }
 
