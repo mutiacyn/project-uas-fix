@@ -34,15 +34,15 @@ require __DIR__ . '/auth.php';
 Route::middleware(['auth'])->group(function () {
 
     // Dashboard & Profile
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // ===================== CUTI =====================
     Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');          // semua login
-    Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create'); // semua login
-    Route::post('/cuti', [CutiController::class, 'store'])->name('cuti.store');         // semua login
+    // Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create'); // semua login
+    // Route::post('/cuti', [CutiController::class, 'store'])->name('cuti.store');         // semua login
 
     // Admin-only cuti
     Route::middleware('role:admin')->group(function () {
@@ -57,15 +57,24 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('divisi', DivisionController::class);
         Route::resource('jabatan', PositionController::class);
         Route::resource('user', UserController::class);
+        // Route::get('/cuti/{cuti}/edit', [CutiController::class, 'edit'])->name('cuti.edit');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::put('/cuti/{cuti}/approve', [CutiController::class, 'approve'])->name('admin.cuti.approve');
         Route::put('/cuti/{cuti}/reject', [CutiController::class, 'reject'])->name('admin.cuti.reject');
+        // Route::get('/cuti/{cuti}', [CutiController::class, 'index'])->name('cuti.index');
+        // Route::get('/cuti', [CutiController::class, 'index'])
+        // ->name('cuti.index');
+
     });
  
     // ===================== STAFF =====================
     Route::middleware('role:staff')->group(function () {
-        // Staff dashboard sekaligus menampung form cuti
-        Route::get('/staff', [StaffController::class, 'index'])->name('staff.dashboard');
-        Route::post('/staff/cuti', [CutiController::class, 'store'])->name('staff.cuti.store');
+        Route::get('/staff/dashboard', [DashboardController::class, 'staff'])
+            ->name('staff.dashboard');
+
+        Route::get('/cuti/create', [CutiController::class, 'create'])->name('cuti.create');
+        Route::post('/cuti', [CutiController::class, 'store'])->name('cuti.store');
+        // Route::get('/cuti', [CutiController::class, 'index'])->name('cuti.index');
     });
 
     // ===================== GUEST =====================

@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('dashboard') }}">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" >
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -24,6 +24,13 @@
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Menu Administrasi -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('dashboard') }}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{{ route('karyawan.index') }}">
                 <i class="fas fa-fw fa-users"></i>
@@ -77,9 +84,16 @@
         <hr class="sidebar-divider my-0">
 
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('cuti.index') }}">
+            <a class="nav-link" href="{{ route('staff.dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('cuti.index') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Riwayat Cuti</span>
             </a>
         </li>
 
